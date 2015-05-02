@@ -6,7 +6,7 @@ LIBS = libft/libft.a liba/liba.a
 
 RM	= rm -rf
 
-SRC = main.c
+SRC = test.c
 
 OBJ	= $(SRC:.c=.o)
 
@@ -22,7 +22,7 @@ $(NAME):
 	@make -C ./liba
 	@git submodule update
 	@cd glfw && cmake . && make
-	@gcc -Wall -Werror -Wextra -o $(NAME) $(LIBS) $(SRC) -L ./glfw/src/ -lglfw3 -framework OpenGL -framework IOKit -framework Cocoa -framwork CoreVideo
+	@gcc -Wall -Werror -Wextra -o $(NAME) $(LIBS) $(SRC) -L ./glfw/src/ -lglfw3 -framework OpenGL -framework IOKit -framework Cocoa -framework CoreVideo
 
 clean:
 	@make clean -C ./liba
@@ -34,5 +34,9 @@ fclean: clean
 	@make fclean -C ./libft
 	@$(RM) glfw
 	@$(RM) $(NAME)
+
+quick:
+	@$(RM) $(NAME)
+	@gcc -Wall -Werror -Wextra -o $(NAME) $(LIBS) $(SRC) -L ./glfw/src/ -lglfw3 -framework OpenGL -framework IOKit -framework Cocoa -framework CoreVideo
 
 re: fclean all
