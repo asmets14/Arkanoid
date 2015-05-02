@@ -22,7 +22,7 @@ $(NAME):
 	@make -C ./liba
 	@git submodule update
 	@cd glfw && cmake . && make
-	@gcc -Wall -Werror -Wextra -o glfw/src/libglfw3.a $(NAME) $(LIBS) $(SRC) $(MLX_FLAG)
+	@gcc -Wall -Werror -Wextra -o $(NAME) $(LIBS) $(SRC) -L ./glfw/src/ -lglfw3 -framework OpenGL -framework IOKit -framework Cocoa
 
 clean:
 	@make clean -C ./liba
