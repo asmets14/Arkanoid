@@ -1,12 +1,12 @@
 CC = gcc
 
-FLAG = -Wall -Werror -Werror 
+FLAG = -Wall -Werror -Werror
 
 LIBS = libft/libft.a liba/liba.a
 
-RM	= rm -f
+RM	= rm -rf
 
-SRC = 
+SRC = main.c
 
 OBJ	= $(SRC:.c=.o)
 
@@ -15,28 +15,24 @@ NAME = arkanoid
 all: $(NAME)
 	
 libcompil:
-	make -C ./libft/
-
-gitcompil:
-	git submodule add https://github.com/glfw/glfw.git
-	git submodule update
-
+	@make -C ./libft/
 
 $(NAME):
-	Make -C ./libft
-	Make -C ./liba
-	gcc -Wall -Werror -Wextra -o $(NAME) $(LIBS) $(SRC) $(MLX_FLAG)
+	@make -C ./libft
+	@make -C ./liba
+	@git submodule update
+	@cd glfw && cmake . && make
+	@gcc -Wall -Werror -Wextra -o glfw/src/libglfw3.a $(NAME) $(LIBS) $(SRC) $(MLX_FLAG)
 
 clean:
-	Make -C clean ./liba
-	Make -C clean ./libft
-	$(RM) $(OBJ)
+	@make clean -C ./liba
+	@make clean -C ./libft
+	@$(RM) $(OBJ)
 
 fclean: clean
-	Make -C fclean ./liba
-	Make -C fclean ./libft
-	$(RM) $(NAME)
+	@make fclean -C ./liba
+	@make fclean -C ./libft
+	@$(RM) glfw
+	@$(RM) $(NAME)
 
 re: fclean all
-
-	
