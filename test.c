@@ -50,18 +50,46 @@ char **get_map()
 	return (ft_strsplit(buf, '\n'));
 }
 
+float       ft_sqrt2(const float n)
+{
+  /*We are using n itself as initial approximation
+   This can definitely be improved */
+ float x = n;
+ float y = 1;
+ float e = 0.0000001; /* e decides the accuracy level*/
 
+  while(x - y > e)
+  {
+    x = (x + y)/2;
+    y = n/x;
+  }
+  return x;
+}
+void normalize(t_bal *bal)
+{
+	float tmp;
 
+	tmp = ft_sqrt2(bal->dir_x * bal->dir_x *+ bal->dir_y * bal->dir_y);
+	bal->norm_x = bal->dir_x / tmp;
+	bal->norm_y = bal->dir_y / tmp;
+}
 
 void move_bal(t_bal *bal, t_env *e)
 {
-	if(bal->x1 < -1.0 || bal->x1 > 1.0) // coter
+	if(bal->x1 < -1.0) // gauche
+	{
+		bal->dir_x *= -1.5;
+	}
+	else if(bal->x1 > 1.0) //droite
 		bal->dir_x *= -1;
 	if(bal->y1 >= 1) // plafond
-		bal->dir_y *= -1;
-	if(bal->y1 <= -0.90 && (bal->x1 >= e->x_bar && bal->x1 <= (e->x_bar + 0.189))) // Detection palet!
 	{
-		bal->dir_y *= -1;
+		bal->dir_y *= -4;
+	}
+	if(bal->y1 <= -0.90 /*&& (bal->x1 >= e->x_bar && bal->x1 <= (e->x_bar + 0.189))*/) // Detection palet!
+	{
+		bal->dir_y = 1;
+		bal->dir_x *= 1.5;
 	}
 	else if(bal->y1 < -1) // ta perdu
 	{
@@ -69,8 +97,10 @@ void move_bal(t_bal *bal, t_env *e)
 		sleep(5);
 		exit(2);
 	}
-	bal->x1 += (SPEED * bal->dir_x);
-	bal->y1 += (SPEED * bal->dir_y);
+	normalize(bal);
+	bal->x1 += (SPEED * bal->norm_x);
+	bal->y1 += (SPEED * bal->norm_y);
+	(void)e;
 }
 
 
