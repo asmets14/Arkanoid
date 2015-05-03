@@ -14,7 +14,10 @@ SRC = main.c \
 		init_score.c \
 		draw_seg.c \
 		key_callback.c \
-		singleton.c
+		singleton.c \
+		gere_map.c \
+		color_seg.c \
+		color_seg2.c
 
 
 OBJ	= $(SRC:.c=.o)
