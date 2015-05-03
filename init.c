@@ -25,3 +25,14 @@ void init_env(t_env *e)
 	e->x_bar = 0;
 	e->space = 0;
 }
+
+void init_window(t_env *e)
+{
+	if (!glfwInit())
+		exit(2);
+	if (!(e->window = glfwCreateWindow(e->width, e->height, "Arkanoid", NULL, NULL)))
+	{
+		glfwTerminate();
+		exit(2);
+	}
+}

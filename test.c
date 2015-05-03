@@ -1,7 +1,5 @@
 #include "arkanoid.h"
 
-#define SPEED 0.02
-
 t_env *ft_singleton(t_env *ptr)
 {
 	static t_env *save = NULL;
@@ -50,30 +48,6 @@ char **get_map()
 	return (ft_strsplit(buf, '\n'));
 }
 
-float       ft_sqrt2(const float n)
-{
-  /*We are using n itself as initial approximation
-   This can definitely be improved */
- float x = n;
- float y = 1;
- float e = 0.0000001; /* e decides the accuracy level*/
-
-  while(x - y > e)
-  {
-    x = (x + y)/2;
-    y = n/x;
-  }
-  return x;
-}
-void normalize(t_bal *bal)
-{
-	float tmp;
-
-	tmp = ft_sqrt2(bal->dir_x * bal->dir_x *+ bal->dir_y * bal->dir_y);
-	bal->norm_x = bal->dir_x / tmp;
-	bal->norm_y = bal->dir_y / tmp;
-}
-
 void move_bal(t_bal *bal, t_env *e)
 {
 	if(bal->x1 < -1.0) // gauche
@@ -82,11 +56,11 @@ void move_bal(t_bal *bal, t_env *e)
 	}
 	else if(bal->x1 > 1.0) //droite
 		bal->dir_x *= -1;
-	if(bal->y1 >= 1) // plafond
+	if(bal->y1 >= 0.86) // plafond
 	{
 		bal->dir_y *= -4;
 	}
-	if(bal->y1 <= -0.90 /*&& (bal->x1 >= e->x_bar && bal->x1 <= (e->x_bar + 0.189))*/) // Detection palet!
+	if(bal->y1 <= -0.90 && (bal->x1 >= e->x_bar && bal->x1 <= (e->x_bar + 0.189))) // Detection palet!
 	{
 		bal->dir_y = 1;
 		bal->dir_x *= 1.5;
@@ -103,8 +77,6 @@ void move_bal(t_bal *bal, t_env *e)
 	(void)e;
 }
 
-
-
 void boucle_principal(char **map, t_bal *bal, t_brick *brick, t_env *e)
 {
 	while(1)
@@ -118,9 +90,7 @@ void boucle_principal(char **map, t_bal *bal, t_brick *brick, t_env *e)
 		draw_circle(bal); // radius x y
 		draw_barre(e->x_bar, -0.90);
 		if(e->space == 1 && e->pauz == 1)
-		{
 			move_bal(bal, e);
-		}
 		glfwSwapBuffers(e->window);
 		glfwPollEvents();
 	}
@@ -138,13 +108,7 @@ int main (void)
 	ft_singleton(&e);
 	init_val(&bal);
 	map = get_map();
-	if (!glfwInit())
-		exit(2);
-	if (!(e.window = glfwCreateWindow(e.width, e.height, "Arkanoid", NULL, NULL)))
-	{
-		glfwTerminate();
-		exit( EXIT_FAILURE );
-	}
+	init_window(&e);
 	glfwSetKeyCallback(e.window, key_callback);
 	glfwGetFramebufferSize(e.window, &e.width, &e.height); // recupere valeur en pixels du framebuffer
 	glClearColor( 0.f, 0.f, 0.f, 0.0f );
@@ -152,36 +116,3 @@ int main (void)
 	glfwTerminate();
 	return (0);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

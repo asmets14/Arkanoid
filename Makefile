@@ -6,7 +6,10 @@ LIBS = libft/libft.a liba/liba.a
 
 RM	= rm -rf
 
-SRC = test.c
+SRC = test.c\
+		init.c\
+		draw.c \
+		math.c
 
 OBJ	= $(SRC:.c=.o)
 

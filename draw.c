@@ -42,8 +42,8 @@ void draw_circle(t_bal *bal)
 	glVertex2f(bal->x1, bal->y1);
 	for(angle = 0.0f; angle <= 2 * M_PI; angle += 0.005)
 	{
-	    bal->x2 = bal->x1 + sin(angle) * bal->radius;
-	    bal->y2 = bal->y1 + cos(angle) * bal->radius;
+	    bal->x2 = bal->x1 + ft_sin(angle) * bal->radius;
+	    bal->y2 = bal->y1 + ft_cos(angle) * bal->radius;
 	    glVertex2f(bal->x2, bal->y2);
 	}
 	glEnd();
