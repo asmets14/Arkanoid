@@ -12,7 +12,7 @@ SRC = main.c \
 		draw.c \
 		math.c \
 		init_score.c \
-		draw_score.c \
+		draw_seg.c \
 		key_callback.c \
 		singleton.c
 

@@ -28,7 +28,7 @@ void boucle_principal(t_bal *bal, t_brick *brick, t_env *e)
 			break;
 		glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 		draw_bricks(e, brick);
-		draw_seg(&s);
+		draw_seg(&s, e);
 		if (e->space == 0)
 			bal->x1 = e->x_bar + 0.125;
 		draw_circle(bal);

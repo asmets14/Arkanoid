@@ -24,6 +24,7 @@ void init_env(t_env *e)
 	e->height = 1200;
 	e->x_bar = 0;
 	e->space = 0;
+	e->score = 642;
 }
 
 void init_window(t_env *e)

@@ -46,7 +46,10 @@ static void		check_bricks(t_bal *bal, t_env *e)
 				{
 					modif_dir(bal, &b);
 					if (e->map[b.i][b.j] != '4')
+					{
 						e->map[b.i][b.j] -= 1;
+						e->score += 1;
+					}
 					return ;
 				}
 			}

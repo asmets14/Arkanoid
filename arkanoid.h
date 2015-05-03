@@ -20,6 +20,7 @@ typedef struct  s_env
 	float 		x_bar;
 	int 		space;
 	int 		pauz;
+	int			score;
 	char		**map;
 }				t_env;
 
@@ -56,7 +57,7 @@ typedef struct 	s_segment
 }				t_segment;
 
 
-typedef struct     s_seg
+typedef struct 	s_seg
 {
     t_segment    seg1;
     t_segment    seg2;
@@ -83,10 +84,7 @@ double		ft_cos(double x);
 float       ft_sqrt2(const float n);
 void		normalize(t_bal *bal);
 void 		move_ball(t_bal *bal, t_env *e);
-void 		draw_centaine(t_seg *s);
-void 		draw_dizaine(t_seg *s);
-void 		draw_unite(t_seg *s);
-void		draw_seg(t_seg *s);
+void		draw_seg(t_seg *s, t_env *e);
 void		init_seg2(t_seg *s);
 void 		init_seg(t_seg *s);
 void		key_callback( GLFWwindow *window, int key,
