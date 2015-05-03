@@ -49,32 +49,32 @@ void draw_circle(t_bal *bal)
 	glEnd();
 }
 
-void draw_bricks(char **map, t_brick *brick)
+void draw_bricks(t_env *e, t_brick *brick)
 {
 	init_brick(brick);
-	while(map[brick->i])
+	while(e->map[brick->i])
 	{
 		brick->x = -0.99;
 		brick->j = 0;
-		while(map[brick->i][brick->j])
+		while(e->map[brick->i][brick->j])
 		{
-			if (map[brick->i][brick->j] != '0')
+			if (e->map[brick->i][brick->j] != '0')
 			{
 				glBegin(GL_POLYGON);
-				get_color(map[brick->i][brick->j]);
+				get_color(e->map[brick->i][brick->j]);
 				glVertex2f(brick->x, brick->y);
-				get_color(map[brick->i][brick->j]);
+				get_color(e->map[brick->i][brick->j]);
 				glVertex2f(brick->x + brick->tx, brick->y);
-				get_color(map[brick->i][brick->j]);
+				get_color(e->map[brick->i][brick->j]);
 				glVertex2f(brick->x + brick->tx, brick->y + brick->ty);
-				get_color(map[brick->i][brick->j]);
+				get_color(e->map[brick->i][brick->j]);
 				glVertex2f(brick->x, brick->y + brick->ty);
 				glEnd();
 			}
-			brick->x += brick->tx + 0.01;
+			brick->x += brick->tx;
 			brick->j++;
 		}
-		brick->y += brick->ty - 0.01;
+		brick->y += brick->ty;
 		brick->i++;
 	}
 }

@@ -3,7 +3,7 @@
 void init_val(t_bal *bal)
 {	
 	bal->y1 = -0.87;
-	bal->radius = 0.03;
+	bal->radius = 0.02;
 	bal->dir_x = 1;
 	bal->dir_y = 1;
 }

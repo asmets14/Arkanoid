@@ -6,10 +6,16 @@ LIBS = libft/libft.a liba/liba.a
 
 RM	= rm -rf
 
-SRC = test.c\
-		init.c\
+SRC = main.c \
+		colision.c \
+		init.c \
 		draw.c \
-		math.c
+		math.c \
+		init_score.c \
+		draw_score.c \
+		key_callback.c \
+		singleton.c
+
 
 OBJ	= $(SRC:.c=.o)
 
